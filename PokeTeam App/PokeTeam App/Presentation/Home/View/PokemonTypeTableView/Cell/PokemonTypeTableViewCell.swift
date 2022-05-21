@@ -15,7 +15,6 @@ final class PokemonTypeTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
-        label.text = "Couldn`t load Pokemon type list"
         return label
     }()
     
