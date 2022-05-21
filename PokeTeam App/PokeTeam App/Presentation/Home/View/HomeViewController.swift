@@ -67,3 +67,18 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+// MARK: - VIEW MODEL OUTPUT
+extension HomeViewController: HomeViewModelOutput {
+    
+    func didFetchData() {
+        DispatchQueue.main.async {
+            self.pokemonTypeTable.reloadData()
+        }
+    }
+    
+    func didFailFetchData() {
+        DispatchQueue.main.async {
+            self.pokemonTypeTable.reloadData()
+        }
+    }
+}
