@@ -48,3 +48,22 @@ extension HomeViewController {
     }
 }
 
+// MARK: - TABLE VIEW DELEGATE AND DATASOURCE
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.model?.pokemonTypeCount ?? .zero
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PokemonTypeTableViewCell.identifier, for: indexPath) as? PokemonTypeTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        let typeString: String = viewModel.model?.pokemonTypeNames[indexPath.row].name ?? ""
+        cell.configure(typeString: typeString)
+        
+        return cell
+    }
+}
+
