@@ -15,6 +15,7 @@
 		2F2A099D28397C04004504AD /* PokeTeam_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A099C28397C04004504AD /* PokeTeam_AppTests.swift */; };
 		2F2A09A728397C04004504AD /* PokeTeam_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A09A628397C04004504AD /* PokeTeam_AppUITests.swift */; };
 		2F2A09A928397C04004504AD /* PokeTeam_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A09A828397C04004504AD /* PokeTeam_AppUITestsLaunchTests.swift */; };
+		2F2A09C72839860B004504AD /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A09C62839860B004504AD /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		2F2A09A228397C04004504AD /* PokeTeam AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PokeTeam AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F2A09A628397C04004504AD /* PokeTeam_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeTeam_AppUITests.swift; sourceTree = "<group>"; };
 		2F2A09A828397C04004504AD /* PokeTeam_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeTeam_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2F2A09C62839860B004504AD /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				2F2A09B528397CEB004504AD /* Application */,
 				2F2A09B628397DCB004504AD /* Presentation */,
+				2F2A09BF283985A3004504AD /* Network */,
 				2F2A098E28397C04004504AD /* Assets.xcassets */,
 				2F2A099028397C04004504AD /* LaunchScreen.storyboard */,
 				2F2A099328397C04004504AD /* Info.plist */,
@@ -154,6 +157,22 @@
 				2F2A098928397C02004504AD /* HomeViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		2F2A09BF283985A3004504AD /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				2F2A09C1283985B1004504AD /* Manager */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		2F2A09C1283985B1004504AD /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				2F2A09C62839860B004504AD /* NetworkManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,6 +307,7 @@
 			files = (
 				2F2A098A28397C02004504AD /* HomeViewController.swift in Sources */,
 				2F2A098628397C02004504AD /* AppDelegate.swift in Sources */,
+				2F2A09C72839860B004504AD /* NetworkManager.swift in Sources */,
 				2F2A098828397C02004504AD /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
