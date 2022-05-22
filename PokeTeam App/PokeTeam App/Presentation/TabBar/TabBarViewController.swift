@@ -1,5 +1,5 @@
 //
-//  MainViewController.swift
+//  TabBarViewController.swift
 //  PokeTeam App
 //
 //  Created by Gabriel Levis Zawalski on 21/05/22.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MainViewController: UITabBarController {
+final class TabBarViewController: UITabBarController {
     
     private lazy var homeTabBarItem: UITabBarItem = {
         let item: UITabBarItem = UITabBarItem(title: "Home",
