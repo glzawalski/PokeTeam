@@ -60,6 +60,11 @@ extension SceneDelegate {
         let navController = UINavigationController(rootViewController: TabBarViewController())
         navController.navigationBar.isTranslucent = false
         
+        let navControllerAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
+        navControllerAppearance.configureWithDefaultBackground()
+        navController.navigationBar.standardAppearance = navControllerAppearance
+        navController.navigationBar.scrollEdgeAppearance = navControllerAppearance
+        
         return navController
     }
 }
