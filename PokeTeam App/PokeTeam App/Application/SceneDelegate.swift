@@ -17,7 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window.windowScene = windowScene
-        window.rootViewController = MainViewController()
+        window.backgroundColor = .white
+        window.rootViewController = makeNavigationController()
         window.makeKeyAndVisible()
         
         self.window = window
@@ -50,7 +51,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
 
+// MARK: - NAVIGATION CONTROLLER
+extension SceneDelegate {
+    
+    private func makeNavigationController() -> UINavigationController {
+        let navController = UINavigationController(rootViewController: TabBarViewController())
+        navController.navigationBar.isTranslucent = false
+        
+        return navController
+    }
+}
