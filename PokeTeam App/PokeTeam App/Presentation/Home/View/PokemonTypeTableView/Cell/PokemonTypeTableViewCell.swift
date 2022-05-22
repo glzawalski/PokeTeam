@@ -29,7 +29,7 @@ final class PokemonTypeTableViewCell: UITableViewCell {
     }
     
     private func setupView() {
-        selectionStyle = .none
+        selectionStyle = .default
         backgroundColor = .clear
         addComponents()
         addConstraints()

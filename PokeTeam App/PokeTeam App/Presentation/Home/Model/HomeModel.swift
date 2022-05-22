@@ -7,11 +7,11 @@
 
 final class HomeModel {
     
-    var pokemonTypeCount: Int
-    var pokemonTypeNames: [PokemonType]
+    var count: Int
+    var types: [PokemonType]
     
     init(from list: PokemonTypeList) {
-        pokemonTypeCount = list.count
-        pokemonTypeNames = list.results
+        count = list.count
+        types = list.results
     }
 }

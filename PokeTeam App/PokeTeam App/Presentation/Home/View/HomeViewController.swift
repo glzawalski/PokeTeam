@@ -9,15 +9,16 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    let defaults = UserDefaults.standard
+    
     private lazy var pokemonTypeTable: UITableView = {
         let tableView: UITableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .clear
         tableView.register(PokemonTypeTableViewCell.self, forCellReuseIdentifier: PokemonTypeTableViewCell.identifier)
         tableView.showsVerticalScrollIndicator = false
-        tableView.tableFooterView = UIView(frame: .zero)
         return tableView
     }()
     
@@ -30,6 +31,18 @@ class HomeViewController: UIViewController {
         addComponents()
         addConstraints()
         viewModel.fetchData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        scrollToFavoriteType()
+    }
+    
+    private func scrollToFavoriteType() {
+        guard let index = viewModel.model?.types.firstIndex(where: { $0.name == defaults.string(forKey: "FavoriteType") }) else { return }
+        
+        let indexPath: IndexPath = IndexPath(row: index, section: .zero)
+        pokemonTypeTable.selectRow(at: indexPath, animated: false, scrollPosition: .none)
     }
 }
 
@@ -52,18 +65,24 @@ extension HomeViewController {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.model?.pokemonTypeCount ?? .zero
+        return viewModel.model?.count ?? .zero
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PokemonTypeTableViewCell.identifier, for: indexPath) as? PokemonTypeTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PokemonTypeTableViewCell.identifier, for: indexPath) as? PokemonTypeTableViewCell,
+              let typeName = viewModel.model?.types[indexPath.row].name else {
             return UITableViewCell()
         }
         
-        let typeString: String = viewModel.model?.pokemonTypeNames[indexPath.row].name ?? ""
-        cell.configure(typeString: typeString)
+        cell.configure(typeString: typeName)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let typeName = viewModel.model?.types[indexPath.row].name else { return }
+        
+        defaults.set(typeName, forKey: "FavoriteType")
     }
 }
 
