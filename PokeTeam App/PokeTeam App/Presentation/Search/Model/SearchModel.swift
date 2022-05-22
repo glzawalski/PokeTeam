@@ -8,10 +8,12 @@
 final class SearchModel {
     
     var count: Int
-    var names: [Pokemon]
+    var allPokemon: [Pokemon]
+    var filteredPokemon: [Pokemon]
     
     init(from list: PokemonList) {
         self.count = list.count
-        self.names = list.results
+        self.allPokemon = list.results
+        self.filteredPokemon = list.results
     }
 }

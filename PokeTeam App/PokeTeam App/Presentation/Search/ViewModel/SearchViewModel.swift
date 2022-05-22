@@ -11,6 +11,7 @@ protocol SearchViewModelInput {
     var model: SearchModel? { get }
     
     func fetchData()
+    func filterItems(with string: String)
 }
 
 protocol SearchViewModelOutput {
@@ -28,6 +29,17 @@ final class SearchViewModel: SearchViewModelInput {
          networkManager: NetworkManagerInput = NetworkManager()) {
         self.output = output
         self.networkManager = networkManager
+    }
+}
+
+// MARK: - FILTER
+extension SearchViewModel {
+    
+    internal func filterItems(with string: String) {
+        guard let model = model else { return }
+        
+        model.filteredPokemon = string == "" ? model.allPokemon : model.allPokemon.filter { $0.name.contains(string.lowercased()) }
+        model.count = model.filteredPokemon.count
     }
 }
 

@@ -9,6 +9,13 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
+    private lazy var searchBar: UISearchBar = {
+        let bar: UISearchBar = UISearchBar()
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.delegate = self
+        return bar
+    }()
+    
     private lazy var pokemonTable: UITableView = {
         let tableView: UITableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -37,11 +44,17 @@ class SearchViewController: UIViewController {
 extension SearchViewController {
     
     private func addComponents() {
+        view.addSubview(searchBar)
         view.addSubview(pokemonTable)
     }
     
     private func addConstraints() {
-        pokemonTable.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        searchBar.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        searchBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        searchBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        pokemonTable.topAnchor.constraint(equalTo: searchBar.bottomAnchor).isActive = true
         pokemonTable.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         pokemonTable.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         pokemonTable.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -60,19 +73,31 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let typeString: String = viewModel.model?.names[indexPath.row].name ?? ""
-        cell.configure(nameString: typeString)
+        let pokemonName = viewModel.model?.filteredPokemon[indexPath.row].name ?? ""
+        cell.configure(nameString: pokemonName)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let pokemon = viewModel.model?.names[indexPath.row].name else { return }
+        guard let pokemonName = viewModel.model?.filteredPokemon[indexPath.row].name else { return }
         
         let detailedPage = DetailedPageView()
-        detailedPage.selectedPokemon = pokemon
+        detailedPage.selectedPokemon = pokemonName
         detailedPage.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(detailedPage, animated: true)
+    }
+}
+
+// MARK: - SEARCH BAR DELEGATE
+extension SearchViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.filterItems(with: searchText)
+        
+        DispatchQueue.main.async {
+            self.pokemonTable.reloadData()
+        }
     }
 }
 
