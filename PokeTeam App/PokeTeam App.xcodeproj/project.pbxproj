@@ -170,10 +170,10 @@
 		2F2A09B628397DCB004504AD /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				2F2A09E12839AD78004504AD /* DetailedPage */,
-				2F2A09CF28399E65004504AD /* Search */,
 				2F2A09CC283998BB004504AD /* TabBar */,
 				2F2A09B728397DD6004504AD /* Home */,
+				2F2A09CF28399E65004504AD /* Search */,
+				2F2A09E12839AD78004504AD /* DetailedPage */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
