@@ -10,10 +10,14 @@ import UIKit
 class DetailedPageView: UIViewController {
     
     var selectedPokemon: Pokemon?
+    var isShowingRegularSprite: Bool = true
     
     private lazy var spriteImage: UIImageView = {
         let imageView: UIImageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isUserInteractionEnabled = true
+        let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(spriteTapped))
+        imageView.addGestureRecognizer(tapRecognizer)
         return imageView
     }()
     
@@ -74,8 +78,13 @@ class DetailedPageView: UIViewController {
             typeStack.addArrangedSubview(label)
         }
         
-        guard let firstSprite = model.sprites.first,
-              let url = URL(string: firstSprite),
+        updateSprite()
+    }
+    
+    private func updateSprite() {
+        guard let model = viewModel.model,
+              let sprite = isShowingRegularSprite ? model.sprites.first : model.sprites.last,
+              let url = URL(string: sprite),
               let data = try? Data(contentsOf: url) else { return }
         
         spriteImage.image = UIImage(data: data)
@@ -108,6 +117,15 @@ extension DetailedPageView {
         
         typeStack.topAnchor.constraint(equalTo: weightLabel.bottomAnchor, constant: 10).isActive = true
         typeStack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+}
+
+// MARK: - TAP RECOGNIZER
+extension DetailedPageView {
+    
+    @objc func spriteTapped(gestureRecognizer: UITapGestureRecognizer) {
+        isShowingRegularSprite.toggle()
+        updateSprite()
     }
 }
 
