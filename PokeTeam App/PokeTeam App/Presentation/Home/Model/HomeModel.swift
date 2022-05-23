@@ -8,7 +8,7 @@
 final class HomeModel {
     
     var count: Int
-    var types: [PokemonType]
+    var types: [PokemonTypeListItem]
     
     init(from list: PokemonTypeList) {
         count = list.count

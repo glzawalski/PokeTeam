@@ -7,5 +7,5 @@
 
 struct PokemonTypeList: Decodable {
     var count: Int
-    var results: [PokemonType]
+    var results: [PokemonTypeListItem]
 }
