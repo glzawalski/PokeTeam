@@ -9,7 +9,7 @@ import UIKit
 
 class DetailedPageView: UIViewController {
     
-    var selectedPokemon: String = ""
+    var selectedPokemon: Pokemon?
     
     private lazy var idLabel: UILabel = {
         let label: UILabel = UILabel()
@@ -38,12 +38,15 @@ class DetailedPageView: UIViewController {
     private lazy var viewModel: DetailedPageViewModelInput = {
         return DetailedPageViewModel(output: self)
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         addComponents()
         addConstraints()
+        
+        guard let selectedPokemon = selectedPokemon else { return }
+
         viewModel.fetchData(for: selectedPokemon)
     }
     

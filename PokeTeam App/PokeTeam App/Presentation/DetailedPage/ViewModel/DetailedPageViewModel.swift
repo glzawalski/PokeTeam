@@ -10,7 +10,7 @@ import Foundation
 protocol DetailedPageViewModelInput {
     var model: DetailedPageModel? { get }
     
-    func fetchData(for pokemon: String)
+    func fetchData(for pokemon: Pokemon)
 }
 
 protocol DetailedPageViewModelOutput {
@@ -33,9 +33,9 @@ final class DetailedPageViewModel: DetailedPageViewModelInput {
 
 // MARK: - NETWORKING
 extension DetailedPageViewModel {
-    internal func fetchData(for pokemon: String) {
+    internal func fetchData(for pokemon: Pokemon) {
         networkManager.fetch(PokemonDetails.self,
-                             url: "https://pokeapi.co/api/v2/pokemon/\(pokemon)") { response in
+                             url: pokemon.url) { response in
             switch response {
             case .failure:
                 self.output.didFailFetchData()

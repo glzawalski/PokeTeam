@@ -80,10 +80,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let pokemonName = viewModel.model?.filteredPokemon[indexPath.row].name else { return }
+        guard let pokemon = viewModel.model?.filteredPokemon[indexPath.row] else { return }
         
         let detailedPage = DetailedPageView()
-        detailedPage.selectedPokemon = pokemonName
+        detailedPage.selectedPokemon = pokemon
         detailedPage.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(detailedPage, animated: true)
     }
