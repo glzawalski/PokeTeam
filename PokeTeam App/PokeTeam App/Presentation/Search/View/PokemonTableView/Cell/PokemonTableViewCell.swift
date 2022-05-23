@@ -48,8 +48,8 @@ extension PokemonTableViewCell {
     }
     
     private func addConstraints() {
-        nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
         nameLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
     }
 }
