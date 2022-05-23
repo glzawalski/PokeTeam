@@ -11,10 +11,10 @@ class DetailedPageView: UIViewController {
     
     var selectedPokemon: Pokemon?
     
-    private lazy var idLabel: UILabel = {
-        let label: UILabel = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private lazy var spriteImage: UIImageView = {
+        let imageView: UIImageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
     private lazy var nameLabel: UILabel = {
@@ -35,6 +35,15 @@ class DetailedPageView: UIViewController {
         return label
     }()
     
+    private lazy var typeStack: UIStackView = {
+        let stack: UIStackView = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .horizontal
+        stack.alignment = .center
+        stack.spacing = 10
+        return stack
+    }()
+    
     private lazy var viewModel: DetailedPageViewModelInput = {
         return DetailedPageViewModel(output: self)
     }()
@@ -53,11 +62,23 @@ class DetailedPageView: UIViewController {
     private func configure() {
         guard let model = viewModel.model else { return }
         
-        idLabel.text = model.id
         nameLabel.text = model.name
-        heightLabel.text = model.height
-        weightLabel.text = model.weight
+        heightLabel.text = "Height: \(model.height) meters"
+        weightLabel.text = "Weight: \(model.weight) kilograms"
         
+        
+        model.types.forEach {
+            let label: UILabel = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.text = $0
+            typeStack.addArrangedSubview(label)
+        }
+        
+        guard let firstSprite = model.sprites.first,
+              let url = URL(string: firstSprite),
+              let data = try? Data(contentsOf: url) else { return }
+        
+        spriteImage.image = UIImage(data: data)
     }
 }
 
@@ -65,24 +86,28 @@ class DetailedPageView: UIViewController {
 extension DetailedPageView {
     
     private func addComponents() {
-        view.addSubview(idLabel)
+        view.addSubview(spriteImage)
         view.addSubview(nameLabel)
         view.addSubview(heightLabel)
         view.addSubview(weightLabel)
+        view.addSubview(typeStack)
     }
     
     private func addConstraints() {
-        idLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        idLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        spriteImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        spriteImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        nameLabel.topAnchor.constraint(equalTo: idLabel.bottomAnchor, constant: 10).isActive = true
-        nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: spriteImage.bottomAnchor, constant: 10).isActive = true
+        nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         heightLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10).isActive = true
-        heightLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        heightLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         weightLabel.topAnchor.constraint(equalTo: heightLabel.bottomAnchor, constant: 10).isActive = true
-        weightLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        weightLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        typeStack.topAnchor.constraint(equalTo: weightLabel.bottomAnchor, constant: 10).isActive = true
+        typeStack.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
 }
 
