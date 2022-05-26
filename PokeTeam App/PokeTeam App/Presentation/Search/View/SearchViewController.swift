@@ -16,7 +16,7 @@ class SearchViewController: UIViewController {
         return bar
     }()
     
-    private lazy var pokemonTable: UITableView = {
+    public lazy var pokemonTable: UITableView = {
         let tableView: UITableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
@@ -28,7 +28,7 @@ class SearchViewController: UIViewController {
         return tableView
     }()
     
-    private lazy var viewModel: SearchViewModelInput = {
+    lazy var viewModel: SearchViewModelInput = {
         return SearchViewModel(output: self)
     }()
 
@@ -38,17 +38,13 @@ class SearchViewController: UIViewController {
         addConstraints()
         viewModel.fetchData()
     }
-}
-
-// MARK: - COMPONENTS AND CONSTRAINTS
-extension SearchViewController {
     
-    private func addComponents() {
+    public func addComponents() {
         view.addSubview(searchBar)
         view.addSubview(pokemonTable)
     }
     
-    private func addConstraints() {
+    public func addConstraints() {
         searchBar.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         searchBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
