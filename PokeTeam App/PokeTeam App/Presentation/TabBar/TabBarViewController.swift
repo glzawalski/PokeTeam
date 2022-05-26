@@ -35,6 +35,19 @@ final class TabBarViewController: UITabBarController {
         return viewController
     }()
     
+    private lazy var teamTabBarItem: UITabBarItem = {
+        let item: UITabBarItem = UITabBarItem(title: "Team",
+                                              image: UIImage(systemName: "rectangle.grid.2x2"),
+                                              selectedImage: UIImage(systemName: "rectangle.grid.2x2.fill"))
+        return item
+    }()
+    
+    private lazy var teamTab: UIViewController = {
+        let viewController: UIViewController = TeamView()
+        viewController.tabBarItem = teamTabBarItem
+        return viewController
+    }()
+    
     override func viewDidLoad() {
         let tabBarAppearance: UITabBarAppearance = UITabBarAppearance()
         tabBarAppearance.configureWithDefaultBackground()
@@ -46,6 +59,7 @@ final class TabBarViewController: UITabBarController {
         super.viewWillAppear(animated)
         
         viewControllers = [homeTab,
-                           searchTab]
+                           searchTab,
+                           teamTab]
     }
 }
