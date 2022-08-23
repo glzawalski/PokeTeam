@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 final class TabBarViewController: UITabBarController {
     
@@ -17,7 +18,8 @@ final class TabBarViewController: UITabBarController {
     }()
     
     private lazy var homeTab: UIViewController = {
-        let viewController: UIViewController = HomeViewController()
+        let homeView = HomeView().environmentObject(HomeViewModel())
+        let viewController: UIHostingController = UIHostingController(rootView: homeView)
         viewController.tabBarItem = homeTabBarItem
         return viewController
     }()
