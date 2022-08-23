@@ -37,6 +37,7 @@
 		2F2A0A04283EFCAE004504AD /* AddTeamMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A0A03283EFCAD004504AD /* AddTeamMemberView.swift */; };
 		2F2A0A06283F0127004504AD /* TeamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A0A05283F0127004504AD /* TeamViewModel.swift */; };
 		2F2A0A08283F0144004504AD /* TeamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A0A07283F0144004504AD /* TeamModel.swift */; };
+		7886159C28B45BAE00F16873 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7886159B28B45BAE00F16873 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		2F2A0A03283EFCAD004504AD /* AddTeamMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTeamMemberView.swift; sourceTree = "<group>"; };
 		2F2A0A05283F0127004504AD /* TeamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewModel.swift; sourceTree = "<group>"; };
 		2F2A0A07283F0144004504AD /* TeamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamModel.swift; sourceTree = "<group>"; };
+		7886159B28B45BAE00F16873 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -553,6 +555,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7886159C28B45BAE00F16873 /* HomeView.swift in Sources */,
 				2F2A09D82839A865004504AD /* SearchModel.swift in Sources */,
 				2F2A09FC283EF5A1004504AD /* TeamView.swift in Sources */,
 				2F2A09E02839A9CC004504AD /* PokemonTableViewCell.swift in Sources */,
