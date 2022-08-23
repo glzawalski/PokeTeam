@@ -7,26 +7,11 @@
 
 import Foundation
 
-protocol HomeViewModelInput {
-    var model: HomeModel? { get }
-    
-    func fetchData()
-}
-
-protocol HomeViewModelOutput {
-    func didFetchData()
-    func didFailFetchData()
-}
-
-final class HomeViewModel: HomeViewModelInput {
-    
-    var output: HomeViewModelOutput
+final class HomeViewModel: ObservableObject {
     private var networkManager: NetworkManagerInput
-    var model: HomeModel?
+    @Published var model: HomeModel?
     
-    init(output: HomeViewModelOutput,
-         networkManager: NetworkManagerInput = NetworkManager()) {
-        self.output = output
+    init(networkManager: NetworkManagerInput = NetworkManager()) {
         self.networkManager = networkManager
     }
 }
@@ -34,14 +19,10 @@ final class HomeViewModel: HomeViewModelInput {
 // MARK: - NETWORKING
 extension HomeViewModel {
     internal func fetchData() {
-        networkManager.fetch(PokemonTypeList.self,
-                             url: "https://pokeapi.co/api/v2/type") { response in
+        networkManager.fetch(PokemonTypeList.self, url: "https://pokeapi.co/api/v2/type") { response in
             switch response {
-            case .failure:
-                self.output.didFailFetchData()
-            case .success(let list):
-                self.model = HomeModel(from: list)
-                self.output.didFetchData()
+            case let .success(list): self.model = HomeModel(from: list)
+            case .failure: break
             }
         }
     }
