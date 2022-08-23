@@ -18,12 +18,15 @@ final class HomeViewModel: ObservableObject {
 
 // MARK: - NETWORKING
 extension HomeViewModel {
-    internal func fetchData() {
-        networkManager.fetch(PokemonTypeList.self, url: "https://pokeapi.co/api/v2/type") { response in
-            switch response {
-            case let .success(list): self.model = HomeModel(from: list)
-            case .failure: break
+    func fetchData() async {
+        do {
+            let list = try await networkManager.fetch(PokemonTypeList.self, url: "https://pokeapi.co/api/v2/type")
+
+            await MainActor.run {
+                self.model = HomeModel(from: list)
             }
+        } catch {
+            return
         }
     }
 }

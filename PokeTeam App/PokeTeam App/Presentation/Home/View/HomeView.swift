@@ -20,7 +20,9 @@ struct HomeView: View {
                 }
             }
         }
-        .onAppear(perform: viewModel.fetchData)
+        .task {
+            await viewModel.fetchData()
+        }
     }
 }
 
