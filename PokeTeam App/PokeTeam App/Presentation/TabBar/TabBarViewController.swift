@@ -18,7 +18,7 @@ final class TabBarViewController: UITabBarController {
     }()
     
     private lazy var homeTab: UIViewController = {
-        let homeView = HomeView().environmentObject(HomeViewModel())
+        let homeView = HomeView().environmentObject(HomeViewModel()).environmentObject(AppState())
         let viewController: UIHostingController = UIHostingController(rootView: homeView)
         viewController.tabBarItem = homeTabBarItem
         return viewController
