@@ -38,6 +38,7 @@
 		2F2A0A06283F0127004504AD /* TeamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A0A05283F0127004504AD /* TeamViewModel.swift */; };
 		2F2A0A08283F0144004504AD /* TeamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A0A07283F0144004504AD /* TeamModel.swift */; };
 		7886159C28B45BAE00F16873 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7886159B28B45BAE00F16873 /* HomeView.swift */; };
+		788615AF28B6753100F16873 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788615AE28B6753100F16873 /* AppState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		2F2A0A05283F0127004504AD /* TeamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamViewModel.swift; sourceTree = "<group>"; };
 		2F2A0A07283F0144004504AD /* TeamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamModel.swift; sourceTree = "<group>"; };
 		7886159B28B45BAE00F16873 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		788615AE28B6753100F16873 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 		2F2A098428397C02004504AD /* PokeTeam App */ = {
 			isa = PBXGroup;
 			children = (
+				788615AD28B6751F00F16873 /* Data */,
 				2F2A09B528397CEB004504AD /* Application */,
 				2F2A09B628397DCB004504AD /* Presentation */,
 				2F2A09BF283985A3004504AD /* Network */,
@@ -425,6 +428,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		788615AD28B6751F00F16873 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				788615AE28B6753100F16873 /* AppState.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -558,6 +569,7 @@
 				7886159C28B45BAE00F16873 /* HomeView.swift in Sources */,
 				2F2A09D82839A865004504AD /* SearchModel.swift in Sources */,
 				2F2A09FC283EF5A1004504AD /* TeamView.swift in Sources */,
+				788615AF28B6753100F16873 /* AppState.swift in Sources */,
 				2F2A09E02839A9CC004504AD /* PokemonTableViewCell.swift in Sources */,
 				2F2A09BC28397E4D004504AD /* HomeModel.swift in Sources */,
 				2F2A09D128399E76004504AD /* SearchViewController.swift in Sources */,
