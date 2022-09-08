@@ -25,7 +25,7 @@ final class TeamView: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .white
-        tableView.register(PokemonTableViewCell.self, forCellReuseIdentifier: PokemonTableViewCell.identifier)
+//        tableView.register(PokemonTableViewCell.self, forCellReuseIdentifier: PokemonTableViewCell.identifier)
         tableView.showsVerticalScrollIndicator = false
         tableView.tableFooterView = UIView(frame: .zero)
         tableView.isHidden = true
@@ -42,12 +42,13 @@ final class TeamView: UIViewController {
         addComponents()
         addConstraints()
     }
-    
+
+    // TODO: Rework screen to SwiftUI
     @objc func didTapAddTeamButton() {
-        let view = AddTeamMemberView()
-        view.setOutput(self)
-        view.modalPresentationStyle = .formSheet
-        navigationController?.present(view, animated: true)
+//        let view = AddTeamMemberView()
+//        view.setOutput(self)
+//        view.modalPresentationStyle = .formSheet
+//        navigationController?.present(view, animated: true)
     }
 }
 
@@ -72,20 +73,20 @@ extension TeamView {
 
 // MARK: - TABLE VIEW DELEGATE AND DATASOURCE
 extension TeamView: UITableViewDelegate, UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.model.pokemons.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PokemonTableViewCell.identifier, for: indexPath) as? PokemonTableViewCell else {
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: PokemonTableViewCell.identifier, for: indexPath) as? PokemonTableViewCell else {
             return UITableViewCell()
-        }
-        
-        let pokemonName = viewModel.model.pokemons[indexPath.row] ?? ""
-        cell.configure(nameString: pokemonName)
-        
-        return cell
+//        }
+//
+//        let pokemonName = viewModel.model.pokemons[indexPath.row] ?? ""
+//        cell.configure(nameString: pokemonName)
+//
+//        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -95,16 +96,15 @@ extension TeamView: UITableViewDelegate, UITableViewDataSource {
 
 
 // MARK: - ADD TEAM MEMBER OUTPUT
-extension TeamView: AddTeamMemberViewOutput {
-    
-    func didSelect(_ pokemon: Pokemon) {
-        viewModel.add(pokemon)
-    }
-}
+//extension TeamView: AddTeamMemberViewOutput {
+//    func didSelect(_ pokemon: Pokemon) {
+//        viewModel.add(pokemon)
+//    }
+//}
 
 // MARK: - VIEW MODEL OUTPUT
 extension TeamView: TeamViewModelOutput {
-    
+
     func didFinishTeam() {
         navigationController?.dismiss(animated: true)
         createTeamButton.isHidden = true
