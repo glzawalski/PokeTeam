@@ -7,54 +7,37 @@
 
 import Foundation
 
-protocol SearchViewModelInput {
-    var model: SearchModel? { get }
-    
-    func fetchData()
-    func filterItems(with string: String)
-}
-
-protocol SearchViewModelOutput {
-    func didFetchData()
-    func didFailFetchData()
-}
-
-final class SearchViewModel: SearchViewModelInput {
-    
-    var output: SearchViewModelOutput
+final class SearchViewModel: ObservableObject {
     private var networkManager: NetworkManagerInput
-    var model: SearchModel?
+    @Published var model: SearchModel?
     
-    init(output: SearchViewModelOutput,
-         networkManager: NetworkManagerInput = NetworkManager()) {
-        self.output = output
+    init(networkManager: NetworkManagerInput = NetworkManager()) {
         self.networkManager = networkManager
     }
 }
 
+// TODO: Rework feature to work with new SwiftUI views
 // MARK: - FILTER
-extension SearchViewModel {
-    
-    internal func filterItems(with string: String) {
-        guard let model = model else { return }
-        
-        model.filteredPokemon = string == "" ? model.allPokemon : model.allPokemon.filter { $0.name.contains(string.lowercased()) }
-        model.count = model.filteredPokemon.count
-    }
-}
+//extension SearchViewModel {
+//    internal func filterItems(with string: String) {
+//        guard let model = model else { return }
+//
+//        model.filteredPokemon = string == "" ? model.allPokemon : model.allPokemon.filter { $0.name.contains(string.lowercased()) }
+//        model.count = model.filteredPokemon.count
+//    }
+//}
 
 // MARK: - NETWORKING
 extension SearchViewModel {
-    internal func fetchData() {
-        networkManager.fetch(PokemonList.self,
-                             url: "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0") { response in
-            switch response {
-            case .failure:
-                self.output.didFailFetchData()
-            case .success(let list):
+    func fetchData() async {
+        do {
+            let list = try await networkManager.fetch(PokemonList.self, url: "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0")
+
+            await MainActor.run {
                 self.model = SearchModel(from: list)
-                self.output.didFetchData()
             }
+        } catch {
+            return
         }
     }
 }

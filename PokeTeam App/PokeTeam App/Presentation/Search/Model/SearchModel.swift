@@ -6,7 +6,6 @@
 //
 
 final class SearchModel {
-    
     var count: Int
     var allPokemon: [Pokemon]
     var filteredPokemon: [Pokemon]
