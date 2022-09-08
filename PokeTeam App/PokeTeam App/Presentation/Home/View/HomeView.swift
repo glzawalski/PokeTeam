@@ -33,9 +33,6 @@ struct HomeView: View {
     }
 }
 
-// TODO: Add scroll to favorite type on list
-// TODO: Highlight favorite type
-
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
