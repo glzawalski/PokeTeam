@@ -32,7 +32,8 @@ final class TabBarViewController: UITabBarController {
     }()
     
     private lazy var searchTab: UIViewController = {
-        let viewController: UIViewController = SearchViewController()
+        let searchView = SearchView().environmentObject(SearchViewModel())
+        let viewController: UIHostingController = UIHostingController(rootView: searchView)
         viewController.tabBarItem = searchTabBarItem
         return viewController
     }()
