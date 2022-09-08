@@ -16,17 +16,6 @@ final class SearchViewModel: ObservableObject {
     }
 }
 
-// TODO: Rework feature to work with new SwiftUI views
-// MARK: - FILTER
-//extension SearchViewModel {
-//    internal func filterItems(with string: String) {
-//        guard let model = model else { return }
-//
-//        model.filteredPokemon = string == "" ? model.allPokemon : model.allPokemon.filter { $0.name.contains(string.lowercased()) }
-//        model.count = model.filteredPokemon.count
-//    }
-//}
-
 // MARK: - NETWORKING
 extension SearchViewModel {
     func fetchData() async {
