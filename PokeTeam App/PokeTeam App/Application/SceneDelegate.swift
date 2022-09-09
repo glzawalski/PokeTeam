@@ -56,15 +56,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 // MARK: - NAVIGATION CONTROLLER
 extension SceneDelegate {
     
-    private func makeNavigationController() -> UINavigationController {
-        let navController = UINavigationController(rootViewController: TabBarViewController())
-        navController.navigationBar.isTranslucent = false
-        
-        let navControllerAppearance: UINavigationBarAppearance = UINavigationBarAppearance()
-        navControllerAppearance.configureWithDefaultBackground()
-        navController.navigationBar.standardAppearance = navControllerAppearance
-        navController.navigationBar.scrollEdgeAppearance = navControllerAppearance
-        
-        return navController
+    private func makeNavigationController() -> UITabBarController {
+        return TabBarViewController()
     }
 }
