@@ -6,9 +6,9 @@
 //
 
 import UIKit
+import SwiftUI
 
 class DetailedPageView: UIViewController {
-    
     var selectedPokemon: Pokemon?
     var isShowingRegularSprite: Bool = true
     
@@ -93,7 +93,6 @@ class DetailedPageView: UIViewController {
 
 // MARK: - COMPONENTS AND CONSTRAINTS
 extension DetailedPageView {
-    
     private func addComponents() {
         view.addSubview(spriteImage)
         view.addSubview(nameLabel)
@@ -122,7 +121,6 @@ extension DetailedPageView {
 
 // MARK: - TAP RECOGNIZER
 extension DetailedPageView {
-    
     @objc func spriteTapped(gestureRecognizer: UITapGestureRecognizer) {
         isShowingRegularSprite.toggle()
         updateSprite()
@@ -131,7 +129,6 @@ extension DetailedPageView {
 
 // MARK: - VIEW MODEL OUTPUT
 extension DetailedPageView: DetailedPageViewModelOutput {
-    
     func didFetchData() {
         DispatchQueue.main.async {
             self.configure()
@@ -145,3 +142,14 @@ extension DetailedPageView: DetailedPageViewModelOutput {
     }
 }
 
+struct DetailedPage: UIViewControllerRepresentable {
+    var selectedPokemon: Pokemon?
+
+    func makeUIViewController(context: Context) -> DetailedPageView {
+        let viewController = DetailedPageView()
+        viewController.selectedPokemon = selectedPokemon
+        return viewController
+    }
+
+    func updateUIViewController(_ uiViewController: DetailedPageView, context: Context) { }
+}
