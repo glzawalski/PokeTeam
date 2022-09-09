@@ -12,13 +12,13 @@ struct SearchView: View {
     @State private var filterText: String = ""
 
     var filteredPokemon: [Pokemon] {
-      if filterText.isEmpty {
-          return viewModel.model?.allPokemon ?? []
-      } else {
-        return viewModel.model?.allPokemon.filter {
-          $0.name.localizedCaseInsensitiveContains(filterText)
-        } ?? []
-      }
+        if filterText.isEmpty {
+            return viewModel.model?.allPokemon ?? []
+        } else {
+            return viewModel.model?.allPokemon.filter {
+                $0.name.localizedCaseInsensitiveContains(filterText)
+            } ?? []
+        }
     }
 
     // TODO: Remove NavigationView once all app is in shape with SwiftUI
@@ -26,10 +26,16 @@ struct SearchView: View {
         NavigationView{
             List {
                 ForEach(filteredPokemon) { pokemon in
-                    PokemonListItem(pokemon: pokemon)
+                    NavigationLink {
+                        DetailedPage(selectedPokemon: pokemon)
+                    } label: {
+                        PokemonListItem(pokemon: pokemon)
+                    }
                 }
             }
             .searchable(text: $filterText)
+            .navigationTitle("Pokémon List")
+            .navigationBarTitleDisplayMode(.automatic)
         }
         .task {
             await viewModel.fetchData()
