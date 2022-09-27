@@ -27,7 +27,7 @@ struct SearchView: View {
             List {
                 ForEach(filteredPokemon) { pokemon in
                     NavigationLink {
-                        DetailedPage(selectedPokemon: pokemon)
+                        DetailedPageView().environmentObject(DetailedPageViewModel(pokemon: pokemon))
                     } label: {
                         PokemonListItem(pokemon: pokemon)
                     }
