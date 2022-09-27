@@ -7,42 +7,28 @@
 
 import Foundation
 
-protocol DetailedPageViewModelInput {
-    var model: DetailedPageModel? { get }
-    
-    func fetchData(for pokemon: Pokemon)
-}
-
-protocol DetailedPageViewModelOutput {
-    func didFetchData()
-    func didFailFetchData()
-}
-
-final class DetailedPageViewModel: DetailedPageViewModelInput {
-    
-    var output: DetailedPageViewModelOutput
+final class DetailedPageViewModel: ObservableObject {
+    private var pokemon: Pokemon
     private var networkManager: NetworkManagerInput
-    var model: DetailedPageModel?
+    @Published var model: DetailedPageModel?
     
-    init(output: DetailedPageViewModelOutput,
-         networkManager: NetworkManagerInput = NetworkManager()) {
-        self.output = output
+    init(pokemon: Pokemon, networkManager: NetworkManagerInput = NetworkManager()) {
+        self.pokemon = pokemon
         self.networkManager = networkManager
     }
 }
 
 // MARK: - NETWORKING
 extension DetailedPageViewModel {
-    internal func fetchData(for pokemon: Pokemon) {
-        networkManager.fetch(PokemonDetails.self,
-                             url: pokemon.url) { response in
-            switch response {
-            case .failure:
-                self.output.didFailFetchData()
-            case .success(let details):
+    func fetchData() async {
+        do {
+            let details = try await networkManager.fetch(PokemonDetails.self, url: pokemon.url)
+
+            await MainActor.run {
                 self.model = DetailedPageModel(from: details)
-                self.output.didFetchData()
             }
+        } catch {
+            return
         }
     }
 }

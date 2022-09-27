@@ -6,7 +6,6 @@
 //
 
 final class DetailedPageModel {
-    
     var name: String
     var height: String
     var weight: String
